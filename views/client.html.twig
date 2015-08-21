@@ -15,6 +15,11 @@
                 <button type="submit" class="btn btn-info">Update client information</button>
             </form>
 
+            <form action="/clients/{id}">
+                <input id="client_id" name="client_id" type="hidden" value="{{ client.getId() }}">
+                <button type="submit" class="btn btn-danger">Delete this client</button>
+            </form>
+
             {% if form_check == true %}
                 <form action="/update_client" method="post">
                     <input name="_method" type="hidden" value="patch">

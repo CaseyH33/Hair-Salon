@@ -21,6 +21,11 @@
                 <button type="submit" class="btn btn-info">Add new client</button>
             </form>
 
+            <form action="/stylist_update_form">
+                <input id="stylist_id" name="stylist_id" type="hidden" value="{{ stylist.getId() }}">
+                <button type="submit" class="btn btn-warning">Edit stylist information</button>
+            </form>
+
             {% if form_check == true %}
                 <form action="/add_client" method="post">
                     <input id="stylist_id" name="stylist_id" type="hidden" value="{{ stylist.getId() }}">
