@@ -37,6 +37,12 @@
             $this->id=$GLOBALS['DB']->lastInsertId();
         }
 
+        function update($new_name)
+        {
+            $GLOBALS['DB']->exec("UPDATE stylists SET name = '{new_name}' WHERE id = {$this->getId()};");
+            $this->setName($new_name);
+        }
+
         static function getAll()
         {
             $returned_stylists = $GLOBALS['DB']->query("SELECT * FROM stylists ORDER BY name;");
@@ -67,6 +73,7 @@
             }
             return $found_stylist;
         }
+
     }
 
 ?>
