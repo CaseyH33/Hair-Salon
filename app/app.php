@@ -64,6 +64,7 @@
         return $app['twig']->render('stylist.html.twig', array('stylist' => $stylist, 'clients' => $stylist->getClients(), 'form_check' => false));
     });
 
+    //Currently renders an error of Fatal error: Call to a member function delete() on a non-object
     $app->delete("/delete_stylist", function() use ($app) {
         $stylist = Stylist::find($_GET['stylist_id']);
         $stylist->delete();
@@ -116,6 +117,7 @@
         return $app['twig']->render('client.html.twig', array('client' => $client, 'form_check' => false, 'stylists' => $stylists));
     });
 
+    //Currently renders an error of Fatal error: Call to a member function delete() on a non-object
     $app->delete("/delete_client", function() use ($app) {
         $stylist = Stylist::find($_GET['stylist_id']);
         $stylist->delete();
