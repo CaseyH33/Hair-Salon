@@ -11,13 +11,8 @@
             </ul>
 
             <form action="/client_update_form">
-                <input id="client_id" name="client_id" type="hidden" value="{{ client.getId() }}">
+                <input id="client_id" name="client_id" type="hidden" value="{{ client.getId }}">
                 <button type="submit" class="btn btn-info">Update client information</button>
-            </form>
-
-            <form action="/clients/{id}">
-                <input id="client_id" name="client_id" type="hidden" value="{{ client.getId() }}">
-                <button type="submit" class="btn btn-danger">Delete this client</button>
             </form>
 
             {% if form_check == true %}
@@ -48,6 +43,11 @@
                     <button type="submit" class="btn btn-success">Submit</button>
                 </form>
             {% endif %}
+            <form action="/delete_client" method="post">
+                <input name="_method" type="hidden" value="delete">
+                <input id="client_id" name="client_id" type="hidden" value="{{ client.getId }}">
+                <button type="submit" class="btn btn-danger">Delete this client</button>
+            </form>
             <form action="/">
             <button type="submit" class="btn btn-primary">Home</button>
         </form>

@@ -17,18 +17,18 @@
             {% endif %}
 
             <form action="/show_client_form">
-                <input id="stylist_id" name="stylist_id" type="hidden" value="{{ stylist.getId() }}">
+                <input id="stylist_id" name="stylist_id" type="hidden" value="{{ stylist.getId }}">
                 <button type="submit" class="btn btn-info">Add new client</button>
             </form>
 
             <form action="/stylist_update_form">
-                <input id="stylist_id" name="stylist_id" type="hidden" value="{{ stylist.getId() }}">
+                <input id="stylist_id" name="stylist_id" type="hidden" value="{{ stylist.getId }}">
                 <button type="submit" class="btn btn-warning">Edit stylist information</button>
             </form>
 
             {% if form_check == true %}
                 <form action="/add_client" method="post">
-                    <input id="stylist_id" name="stylist_id" type="hidden" value="{{ stylist.getId() }}">
+                    <input id="stylist_id" name="stylist_id" type="hidden" value="{{ stylist.getId }}">
                     <h4>Enter information about the client</h4>
                     <div class="form-group">
                         <label for="name">Client Name</label>

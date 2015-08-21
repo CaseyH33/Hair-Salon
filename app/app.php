@@ -53,6 +53,7 @@
         return $app['twig']->render('stylist_edit.html.twig', array('stylist' => $stylist, 'clients' => $stylist->getClients(), 'form_check' => false));
     });
 
+    //Updates stylist information and renders the stylists' page
     $app->patch("/update_stylist", function() use ($app) {
         $name = $_POST['name'];
         $stylist_id = $_POST['stylist_id'];
@@ -61,6 +62,12 @@
         $stylist->update($name, $stylist_id);
 
         return $app['twig']->render('stylist.html.twig', array('stylist' => $stylist, 'clients' => $stylist->getClients(), 'form_check' => false));
+    });
+
+    $app->delete("/delete_stylist", function() use ($app) {
+        $stylist = Stylist::find($_GET['stylist_id']);
+        $stylist->delete();
+        return $app['twig']->render('index.html.twig', array('stylists' => Stylist::getAll(), 'form_check' => false));
     });
 
     //Shows form on stylists page to add a new client
@@ -107,6 +114,12 @@
         $client->update($name, $phone, $stylist_id, $client_id);
 
         return $app['twig']->render('client.html.twig', array('client' => $client, 'form_check' => false, 'stylists' => $stylists));
+    });
+
+    $app->delete("/delete_client", function() use ($app) {
+        $stylist = Stylist::find($_GET['stylist_id']);
+        $stylist->delete();
+        return $app['twig']->render('index.html.twig', array('stylists' => Stylist::getAll(), 'form_check' => false));
     });
 
     return $app;
