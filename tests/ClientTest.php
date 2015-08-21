@@ -142,5 +142,22 @@
             $this->assertEquals($test_client, $result);
         }
 
+        function testUpdate()
+        {
+            $name = "Bob";
+            $phone = "555-555-5555";
+            $stylist_id = 1;
+            $test_client = new Client($name, $phone, $stylist_id);
+
+            $new_name = "Stuart";
+            $new_phone = "444-444-4444";
+            $new_stylist_id = 2;
+            $new_client = new Client($new_name, $new_phone, $new_stylist_id);
+
+            $test_client->update($new_name, $new_phone, $new_stylist_id);
+
+            $this->assertEquals($new_client, $test_client);
+        }
+
     }
  ?>

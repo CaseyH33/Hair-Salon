@@ -20,14 +20,29 @@
             return $this->name;
         }
 
+        function setName($new_name)
+        {
+            $this->name = $new_name;
+        }
+
         function getPhone()
         {
             return $this->phone;
         }
 
+        function setPhone($new_phone)
+        {
+            $this->phone = $new_phone;
+        }
+
         function getStylistId()
         {
             return $this->stylist_id;
+        }
+
+        function setStylistId($new_stylist_id)
+        {
+            $this->stylist_id = $new_stylist_id;
         }
 
         function getId()
@@ -39,6 +54,14 @@
         {
             $GLOBALS['DB']->exec("INSERT INTO clients (name, phone, stylist_id) VALUES ('{$this->getName()}', '{$this->getPhone()}', {$this->getStylistId()});");
             $this->id = $GLOBALS['DB']->lastInsertId();
+        }
+
+        function update($new_name, $new_phone, $new_stylist_id)
+        {
+            $GLOBALS['DB']->exec("UPDATE clients SET name = '{$new_name}', phone = '{$new_phone}', stylist_id = {$new_stylist_id} WHERE id = {$this->getId()};");
+            $this->setName($new_name);
+            $this->setPhone($new_phone);
+            $this->setStylistId($new_stylist_id);
         }
 
         static function getAll()
