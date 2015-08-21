@@ -28,8 +28,22 @@
     $app->post("/add_stylist", function() use ($app) {
         $stylist = new Stylist($_POST['name']);
         $stylist->save();
-
         return $app['twig']->render('index.html.twig', array('stylists' => Stylist::getAll(), 'form_check' => false));
+    });
+
+    $app->post("/delete_stylists", function() use ($app) {
+        Stylist::deleteAll();
+        return $app['twig']->render('index.html.twig', array('stylists' => Stylist::getAll(), 'form_check' => false));
+    });
+
+    $app->get("/stylists/{id}", function($id) use ($app) {
+        $stylist = Stylist::find($id);
+        return $app['twig']->render('stylist.html.twig', array('stylist' => $stylist, 'clients' => $stylist->getClients(), 'form_check' => false));
+    });
+
+    $app->get("/show_client_form", function() use ($app) {
+        $stylist = Cuisine::find($_GET['stylist_id']);
+        return $app['twig']->render('stylist.html.twig', array('stylist' => $stylist, 'clients' => $stylist->getClients(), 'form_check' => true));
     });
 
     return $app;

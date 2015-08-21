@@ -12,7 +12,7 @@
             <h6>Click on a stylist to see all of their clients</h6>
             <ul>
                 {% for stylist in stylists %}
-                    <li><h4><strong>{{ stylist.getName }}</strong></h4></li>
+                    <li><h4><strong><a href="/stylists/{{ stylist.getId }}">{{ stylist.getName }}</a></strong></h4></li>
                 {% endfor %}
             </ul>
         {% else %}
@@ -32,6 +32,9 @@
                 <button type="submit" class="btn btn-success">Submit</button>
             </form>
         {% endif %}
+        <form action="/delete_stylists" method="post">
+            <button type="submit" class="btn btn-danger">Delete all stylists and clients</button>
+        </form>
     </div>
 </body>
 </html>
