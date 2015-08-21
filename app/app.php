@@ -2,6 +2,7 @@
 
     require_once __DIR__."/../vendor/autoload.php";
     require_once __DIR__."/../src/Stylist.php";
+    require_once __DIR__."/../src/Client.php";
 
     $app = new Silex\Application();
     $app['debug'] = true;
@@ -42,8 +43,31 @@
     });
 
     $app->get("/show_client_form", function() use ($app) {
-        $stylist = Cuisine::find($_GET['stylist_id']);
+        $stylist = Stylist::find($_GET['stylist_id']);
         return $app['twig']->render('stylist.html.twig', array('stylist' => $stylist, 'clients' => $stylist->getClients(), 'form_check' => true));
+    });
+
+    $app->post("/add_client", function() use ($app) {
+        $name = $_POST['name'];
+        $phone = $_POST['phone'];
+        $stylist_id = $_POST['stylist_id'];
+        $client = new Client($name, $phone, $stylist_id);
+        $client->save();
+
+        $stylist = Stylist::find($stylist_id);
+        return $app['twig']->render('stylist.html.twig', array('stylist' => $stylist, 'clients' => $stylist->getClients(), 'form_check' => false));
+    });
+
+    $app->get("/clients/{id}", function($id) use ($app) {
+        $client = Client::find($id);
+        $stylists = Stylist::getAll();
+        return $app['twig']->render('client.html.twig', array('client' => $client, 'form_check' => false, 'stylists' => $stylists));
+    });
+
+    $app->get("/client_update_form", function() use ($app) {
+        $client = Client::find($id);
+        $stylists = Stylist::getAll();
+        return $app['twig']->render('client.html.twig', array('client' => $client, 'form_check' => true, 'stylists' => $stylists));
     });
 
     return $app;
