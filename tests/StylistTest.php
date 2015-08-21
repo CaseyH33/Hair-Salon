@@ -39,5 +39,30 @@
 
             $this->assertEquals(true, is_numeric($result));
         }
+
+        function testSave()
+        {
+            $name = "Bob";
+            $test_stylist = new Stylist($name);
+            $test_stylist->save();
+
+            $result = Stylist::getAll();
+
+            $this->assertEquals($test_stylist, $result[0]);
+        }
+
+        function testGetAll()
+        {
+            $name = "Bob";
+            $test_stylist = new Stylist($name);
+            $test_stylist->save();
+            $name2 = "Kevin";
+            $test_stylist2 = new Stylist($name2);
+            $test_stylist2->save();
+            
+            $result = Stylist::getAll();
+
+            $this->assertEquals([$test_stylist, $test_stylist2], $result);
+        }
     }
  ?>
