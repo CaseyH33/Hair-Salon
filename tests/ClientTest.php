@@ -124,5 +124,23 @@
             $this->assertEquals([], $result);
         }
 
+        function testFind()
+        {
+            $name = "Bob";
+            $phone = "555-555-5555";
+            $stylist_id = 1;
+            $test_client = new Client($name, $phone, $stylist_id);
+            $test_client->save();
+
+            $name2 = "Kevin";
+            $phone2 = "444-444-4444";
+            $test_client2 = new Client($name2, $phone2, $stylist_id);
+            $test_client2->save();
+
+            $result = Client::find($test_client->getId());
+
+            $this->assertEquals($test_client, $result);
+        }
+
     }
  ?>
