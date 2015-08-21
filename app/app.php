@@ -65,9 +65,22 @@
     });
 
     $app->get("/client_update_form", function() use ($app) {
-        $client = Client::find($id);
+        $client = Client::find($_GET['client_id']);
         $stylists = Stylist::getAll();
         return $app['twig']->render('client.html.twig', array('client' => $client, 'form_check' => true, 'stylists' => $stylists));
+    });
+
+    $app->patch("/update_client", function() use ($app) {
+        $name = $_POST['name'];
+        $phone = $_POST['phone'];
+        $stylist_id = $_POST['stylist_id'];
+        $client_id = $_POST['client_id'];
+        $stylists = Stylist::getAll();
+
+        $client = Client::find($client_id);
+        $client->update($name, $phone, $stylist_id, $client_id);
+
+        return $app['twig']->render('client.html.twig', array('client' => $client, 'form_check' => false, 'stylists' => $stylists));
     });
 
     return $app;
