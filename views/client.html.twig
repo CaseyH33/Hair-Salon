@@ -43,9 +43,9 @@
                     <button type="submit" class="btn btn-success">Submit</button>
                 </form>
             {% endif %}
-            <form action="/delete_client" method="post">
+
+            <form action="/clients/{{ client.getId }}" method="post">
                 <input name="_method" type="hidden" value="delete">
-                <input id="client_id" name="client_id" type="hidden" value="{{ client.getId }}">
                 <button type="submit" class="btn btn-danger">Delete this client</button>
             </form>
             <form action="/">
